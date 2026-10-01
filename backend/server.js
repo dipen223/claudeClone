@@ -1,10 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import mongoose from "mongoose";
 
-import OpenAI from 'openai';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 dotenv.config();
 
@@ -17,7 +16,23 @@ app.use(cors());
 
 app.listen(PORT, ()=>{
     console.log(`Server is listening on port : ${PORT}` );
+    connectDB()
 })
+
+const connectDB = async() =>{
+    try{
+         await mongoose.connect(process.env.MONGODB_URL)
+         console.log("MONGODB connected.")
+        
+    }catch(err){
+        console.log(err);
+
+    }
+    
+   
+
+}
+
 
 
 
