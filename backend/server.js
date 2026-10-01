@@ -1,19 +1,23 @@
-// import OpenAI from 'openai';
-
-// const client = new OpenAI({
-//   apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
-// });
-
-// const response = await client.responses.create({
-//   model: 'gpt-5.5',
-//   instructions: 'You are a coding assistant that talks like a pirate',
-//   input: 'Are semicolons optional in JavaScript?',
-// });
-
-// console.log(response.output_text);
-
-
-import express from express;
+import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
+
+import OpenAI from 'openai';
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 dotenv.config();
+
+
+const app = express();
+const PORT = process.env.PORT || 8080;
+
+app.use(express.json());
+app.use(cors());
+
+app.listen(PORT, ()=>{
+    console.log(`Server is listening on port : ${PORT}` );
+})
+
+
+
