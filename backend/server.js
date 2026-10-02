@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 
+import threadRoutes from "./routes/threads.routes.js";
 
 
 dotenv.config();
@@ -13,6 +14,8 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cors());
+
+app.use("/api",threadRoutes);
 
 app.listen(PORT, ()=>{
     console.log(`Server is listening on port : ${PORT}` );
@@ -25,7 +28,7 @@ const connectDB = async() =>{
          console.log("MONGODB connected.")
         
     }catch(err){
-        console.log(err);
+        console.log("Failed to connect with DB",err);
 
     }
     
