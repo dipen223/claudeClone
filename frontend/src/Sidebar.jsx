@@ -10,7 +10,11 @@ function Sidebar() {
                     <Link to="/chat"><i className="fa-regular fa-comments"></i></Link>
                     <Link to="/code"><i className="fa-solid fa-code"></i></Link>
                 </div>
+               
 
+            </div>
+            <div className="newChat">
+                <Link to="/new"><i className="fa-solid fa-plus"></i> New chat</Link>
             </div>
 
             <div className="nav">

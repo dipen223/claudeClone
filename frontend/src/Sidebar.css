@@ -38,6 +38,33 @@
 }
 
 
+.newChat a{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #E8E6DC;
+    transition: background 0.15s ease;
+}
+.newChat a i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+   
+    color: #FAF9F5;
+    font-size: 12px;
+}
+.newChat a:hover{
+    background: #2B2A27;
+}
+
+
 .nav ul{
    list-style: none;
    display: flex;

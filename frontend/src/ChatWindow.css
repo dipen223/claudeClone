@@ -1,6 +1,88 @@
-.chatWindow {
+.mainWindow {
     flex: 1;            /* takes up all remaining width */
     min-width: 0;       /* stops long messages from overflowing */
     display: flex;
     flex-direction: column;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.chatInput{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px 20px;     /* space from the screen edges */
+    box-sizing: border-box;
+}
+
+.inputBox{
+    width:100%;
+    max-width:700px;
+    display: flex;
+    align-items: center;
+    gap:8px;
+    padding:8px 8px 8px 20px;
+    background-color: #30302E;
+    border:1px solid #4A4945;
+    border-radius:16px;
+    box-sizing: border-box;
+}
+
+.inputBox:focus-within{
+    border-color:#6B6A65;
+}
+
+
+.inputBox input{
+    flex:1;
+    min-width:0;
+    border:none;
+    background-color: transparent;
+    padding:12px 0;
+    font-size:1rem;
+    color:#FAF9F5;
+}
+
+.inputBox input:focus{
+    outline:none;
+}
+
+
+.sendButton{
+    flex-shrink:0;
+    width:36px;
+    height:36px;
+    border:none;
+    border-radius:10px;
+  
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition: background-color 0.15s ease;
+}
+
+
+
+.sendButton i{
+    background-color: transparent;
+    color: #FAF9F5;
+    font-size:15px;
+}
+
+@media (max-width: 768px) {
+    .inputBox{
+        padding: 6px 6px 6px 14px;
+        border-radius: 12px;
+    }
+    .inputBox input{
+        font-size: 16px;         
+        padding: 10px 0;
+    }
+    .sendButton{
+        width: 32px;
+        height: 32px;
+    }
 }
