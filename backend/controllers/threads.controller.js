@@ -24,7 +24,7 @@ const getThread = async(req,res) =>{
        if (!thread) {
             return res.status(404).json({ error: "Thread not found" });
         }
-        res.json(thread);
+        res.json(thread.messages);  
 
     }catch(err){
         console.log(err);

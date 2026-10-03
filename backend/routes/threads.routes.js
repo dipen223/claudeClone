@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get("/allThreads",getThreads)
-router.get("/getThread/:id",getThread)
+router.get("/thread/:id",getThread)
 router.delete("/thread/:id",deleteThread)
 
 
