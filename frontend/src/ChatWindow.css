@@ -1,0 +1,6 @@
+.chatWindow {
+    flex: 1;            /* takes up all remaining width */
+    min-width: 0;       /* stops long messages from overflowing */
+    display: flex;
+    flex-direction: column;
+}

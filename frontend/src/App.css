@@ -1,0 +1,16 @@
+*,*::before,*::after{
+   margin:0;
+   padding: 0;
+   background-color: #141413;
+   
+}
+
+.main{
+   color:#faf9f5;
+   display: flex;
+   height:100vh;
+   overflow:hidden;
+}
+
+
+
