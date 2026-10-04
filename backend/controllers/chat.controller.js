@@ -8,11 +8,12 @@ const chatHandler = async(req,res) =>{
         return res.status(400).json({message:"Missing required threadId and or message!"});
     }
     try{
-       const thread =  await Thread.findOne({threadId});
+       let thread =  await Thread.findOne({ threadId, userId: req.userId });
        if(!thread){
         //create a new thread
         thread  = new Thread({
             threadId,
+            userId: req.userId,
             title:message,
             messages:[{role:"user",content:message}]
         });
@@ -20,7 +21,13 @@ const chatHandler = async(req,res) =>{
         thread.messages.push({role:"user",content:message});
        }
 
-       const assistantReply = await getOpenAIApiResponse(message);
+       // send the conversation so far (incl. the new message) so it remembers context.
+       // only role + content: Mongo adds _id etc. that OpenAI rejects.
+       const history = thread.messages
+           .slice(-20)                     // last 20 messages keeps long chats fast and cheap
+           .map(({ role, content }) => ({ role, content }));
+
+       const assistantReply = await getOpenAIApiResponse(history);
        thread.messages.push({role:"assistant",content:assistantReply});
        thread.updatedAt = new Date();
        await thread.save()

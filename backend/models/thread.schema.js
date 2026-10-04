@@ -6,7 +6,13 @@ const ThreadSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-    },  
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+        index: true,
+    },
     title: {
         type: String,
         default: "New Chat",

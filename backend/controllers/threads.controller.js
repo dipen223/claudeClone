@@ -4,7 +4,7 @@ import Thread from "../models/thread.schema.js";
 const getThreads = async(req,res) =>{
     try{
 
-        const allThreads = await Thread.find({}).sort({updatedAt:-1});
+        const allThreads = await Thread.find({ userId: req.userId }).sort({updatedAt:-1});
         res.json(allThreads);
 
 
@@ -20,7 +20,7 @@ const getThreads = async(req,res) =>{
 const getThread = async(req,res) =>{
     try{
         const threadId = req.params.id;
-        const thread = await Thread.findOne({threadId});
+        const thread = await Thread.findOne({ threadId, userId: req.userId });
        if (!thread) {
             return res.status(404).json({ error: "Thread not found" });
         }
@@ -39,7 +39,7 @@ const getThread = async(req,res) =>{
 const deleteThread = async (req, res) => {
     try {
         const threadId = req.params.id;
-        const deletedThread = await Thread.findOneAndDelete({ threadId });
+        const deletedThread = await Thread.findOneAndDelete({ threadId, userId: req.userId });
         if (!deletedThread) {
             return res.status(404).json({ error: "Thread not found" });
         }

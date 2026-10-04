@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 
 import threadRoutes from "./routes/threads.routes.js";
 import chatRoutes from "./routes/chat.routes.js"
+import userRoutes from "./routes/user.routes.js";
 
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(cors());
 
 app.use("/api",threadRoutes);
 app.use("/api",chatRoutes);
+app.use("/api/auth",userRoutes);
 
 app.listen(PORT, ()=>{
     console.log(`Server is listening on port : ${PORT}` );

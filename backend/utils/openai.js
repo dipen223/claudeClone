@@ -2,7 +2,8 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
-const getOpenAIApiResponse = async(message) =>{
+// messages = the conversation so far, as [{ role, content }, ...]
+const getOpenAIApiResponse = async(messages) =>{
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -11,7 +12,7 @@ const getOpenAIApiResponse = async(message) =>{
     },
     body: JSON.stringify({
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: message }],
+      messages,
     }),
 
 });
