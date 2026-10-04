@@ -5,6 +5,19 @@
    
 }
 
+.sidebarOverlay{
+   display: none;
+}
+@media (max-width: 768px){
+   .sidebarOverlay{
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 9;                       /* just under the sidebar (z-index 10) */
+      background-color: rgba(0,0,0,0.5);
+   }
+}
+
 .main{
    color:#faf9f5;
    display: flex;

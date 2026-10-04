@@ -8,18 +8,18 @@ import "highlight.js/styles/github-dark.css";
 
 
 const Chat = () => {
-  const { newChat,prevChats,reply } = useContext(ClaudeContext);
+  const { newChat,prevChats,reply,user} = useContext(ClaudeContext);
   const  [latestReply,setLatestReply] =  useState(null);
 
   useEffect(() =>{
-    if(reply === null){       // loaded an old thread: no typing effect, show everything
+    if(reply === null){       
       setLatestReply(null);
       return;
     }
     if(!prevChats?.length) return;
     const content = reply.split(" ");
 
-    setLatestReply("");   // clear the previous reply so it doesn't flash before typing starts
+    setLatestReply("");   
     let idx = 0;
     const interval = setInterval(() => {
       setLatestReply(content.slice(0,idx+1).join(" "));
@@ -34,7 +34,7 @@ const Chat = () => {
     return () => clearInterval(interval);
   },[prevChats,reply])
   return(<>
-      {newChat && <h1>Back at it ,Dipen</h1>}
+      {newChat && <h1>Back at it ,{user?.username}</h1>}
       {prevChats?.length > 0 && <div className='chats'>
       
         {(latestReply === null ? prevChats : prevChats.slice(0,-1)).map((chat,idx) => (

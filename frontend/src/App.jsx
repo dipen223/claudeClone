@@ -1,9 +1,9 @@
 import './App.css'
 import Sidebar from "./Sidebar.jsx";
 import ChatWindow from "./ChatWindow.jsx";
+import Login from "./Login.jsx";
 import { ClaudeContext } from "./ClaudeContext.jsx";
 import { useState } from 'react';
-import { Routes, Route } from "react-router-dom";
 
 import { v1 as uuidv1 } from "uuid";
 
@@ -15,29 +15,46 @@ function App() {
   const [threads, setThreads] = useState([]);
 
   const [newChat, setNewChat] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);   // only matters on mobile
 
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("user"));
+    } catch {
+      return null;
+    }
+  });
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+  
+    setPrevChats([]);
+    setThreads([]);
+    setReply(null);
+    setPrompt("");
+    setNewChat(true);
+    setCurrentThreadId(uuidv1());
+  };
 
-  const providerValues = { prompt, setPrompt, reply, setReply, currentThreadId, setCurrentThreadId, newChat, setNewChat, prevChats, setPrevChats, threads, setThreads };
-
-
-
-
+  const providerValues = { prompt, setPrompt, reply, setReply, currentThreadId, setCurrentThreadId, newChat, setNewChat, prevChats, setPrevChats, threads, setThreads, user, setUser, logout, sidebarOpen, setSidebarOpen };
 
 
   return (
-    <div className="main">
-      <ClaudeContext.Provider value={providerValues}>
-        <Sidebar></Sidebar>
-        <Routes>
-          <Route path="/" element={<ChatWindow />} />
-          <Route path="/chat/:threadId" element={<ChatWindow />} />
-        </Routes>
+    <ClaudeContext.Provider value={providerValues}>
+      {!user ? (
+        <Login />
+      ) : (
+        <div className="main">
+          <Sidebar></Sidebar>
+          {/* dark backdrop behind the open sidebar on mobile; tap it to close */}
+          {sidebarOpen && <div className="sidebarOverlay" onClick={() => setSidebarOpen(false)}></div>}
+          <ChatWindow />
 
-      </ClaudeContext.Provider>
-
-
-    </div>
+        </div>
+      )}
+    </ClaudeContext.Provider>
   )
 }
 export default App

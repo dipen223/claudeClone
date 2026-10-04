@@ -92,7 +92,7 @@
 }
 
 @media (max-width: 768px){
-    .chats{ padding: 16px 12px; gap: 18px; }
+    .chats{ padding: 60px 12px 16px; gap: 18px; }   /* top space for the ☰ button */
     .user{ max-width: 85%; font-size: 14px; }
     .claude{ font-size: 15px; }
 }

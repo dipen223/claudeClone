@@ -3,10 +3,11 @@ import './ChatWindow.css'
 import Chat from "./Chat.jsx";
 import { ClaudeContext } from './ClaudeContext.jsx';
 import {ScaleLoader} from "react-spinners";
+import { authFetch } from "./api.js";
 
 
 const ChatWindow = () => {
-  const { prompt, setPrompt, reply, setReply, currentThreadId, prevChats,setPrevChats, setNewChat } = useContext(ClaudeContext);
+  const { prompt, setPrompt, reply, setReply, currentThreadId, prevChats,setPrevChats, setNewChat, setSidebarOpen } = useContext(ClaudeContext);
 
   const [loading,setLoading] = useState(false);
 
@@ -27,9 +28,9 @@ const ChatWindow = () => {
     };
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/chat`, options);
+      const response = await authFetch("/chat", options);
       const data = await response.json();
-      setReply(data.reply);
+      if (response.ok) setReply(data.reply);
 
     } catch (err) {
       console.log(err);
@@ -53,6 +54,11 @@ const ChatWindow = () => {
 
   return (
     <div className='mainWindow'>
+      {/* opens the sidebar, only visible on mobile */}
+      <button className="menuBtn" onClick={() => setSidebarOpen(true)}>
+        <i className="fa-solid fa-bars"></i>
+      </button>
+
       <Chat></Chat>
       <ScaleLoader color="#fff" loading={loading}></ScaleLoader>
 
