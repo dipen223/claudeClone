@@ -1,0 +1,98 @@
+.chats{
+    flex: 1;
+    min-height: 0;             /* lets .chats scroll instead of overflowing off the top */
+    width: 100%;
+    max-width: 700px; 
+    margin: 0 auto;
+    padding: 24px 16px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+
+}
+
+.userDiv{
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.user{
+    max-width: 75%;
+    padding: 10px 16px;
+    background-color: #30302E;     /* same as the input box */
+    border-radius: 16px;
+    color: #FAF9F5;
+    font-size: 15px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+
+.claudeDiv{
+     display: flex;
+    justify-content: flex-start;
+
+}
+
+.claude{
+ width: 100%;
+    color: #E8E6DC;
+    font-size: 16px;
+    line-height: 1.7;
+    word-wrap: break-word;
+}
+
+/* ---------- markdown inside Claude replies ---------- */
+.claude p,
+.claude ul,
+.claude ol,
+.claude pre{
+    margin-bottom: 12px;
+}
+.claude ul,
+.claude ol{
+    padding-left: 24px;
+}
+.claude h1,
+.claude h2,
+.claude h3{
+    margin: 16px 0 8px;
+}
+.claude :not(pre) > code{
+    background-color: #30302E;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.claude pre{
+    border-radius: 8px;
+    overflow-x: auto;              /* long code lines scroll instead of overflowing */
+}
+.claude pre code{
+    display: block;
+    padding: 16px;
+    font-size: 14px;
+}
+.claude *{
+    background-color: transparent; /* undo the global * background from App.css */
+}
+.claude pre,
+.claude pre code{
+    background-color: #0d1117;     /* github-dark code block background */
+}
+.chats::-webkit-scrollbar{ width: 6px; }
+.chats::-webkit-scrollbar-thumb{
+    background: #4A4945;
+    border-radius: 3px;
+}
+
+@media (max-width: 768px){
+    .chats{ padding: 16px 12px; gap: 18px; }
+    .user{ max-width: 85%; font-size: 14px; }
+    .claude{ font-size: 15px; }
+}

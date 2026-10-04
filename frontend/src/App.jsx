@@ -10,7 +10,19 @@ function App(){
   const [prompt,setPrompt]  = useState("");
   const [reply,setReply] = useState(null);
   const [currentThreadId,setCurrentThreadId] = useState(uuidv1);
-  const providerValues = {prompt,setPrompt,reply,setReply,currentThreadId,setCurrentThreadId};
+  const [prevChats,setPrevChats] = useState([]);
+
+  const [newChat,setNewChat] = useState(true);
+
+
+
+  const providerValues = {prompt,setPrompt,reply,setReply,currentThreadId,setCurrentThreadId,newChat,setNewChat,prevChats,setPrevChats};
+
+
+
+
+
+
   return (
     <div className="main">
       <ClaudeContext.Provider value={providerValues}>

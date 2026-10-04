@@ -1,4 +1,4 @@
-import React, { useContext,useState } from 'react';
+import React, { useContext,useState,useEffect } from 'react';
 import './ChatWindow.css'
 import Chat from "./Chat.jsx";
 import { ClaudeContext } from './ClaudeContext.jsx';
@@ -6,13 +6,15 @@ import {ScaleLoader} from "react-spinners";
 
 
 const ChatWindow = () => {
-  const { prompt, setPrompt, reply, setReply, currentThreadId } = useContext(ClaudeContext);
+  const { prompt, setPrompt, reply, setReply, currentThreadId, prevChats,setPrevChats, setNewChat } = useContext(ClaudeContext);
 
   const [loading,setLoading] = useState(false);
 
 
 
   const getReply = async () => {
+    if(!prompt.trim()) return;
+    setNewChat(false);
     setLoading(true);
     const options = {
       method: "POST",
@@ -30,19 +32,27 @@ const ChatWindow = () => {
       setReply(data.reply);
 
     } catch (err) {
-      console.log("err");
+      console.log(err);
 
     }
     setLoading(false);
 
   }
+
+
+  useEffect(() => {
+    if (prompt && reply) {
+      setPrevChats(prevChats => [
+        ...prevChats,
+        { role: "user", content: prompt },
+        { role: "assistant", content: reply },
+      ]);
+    }
+    setPrompt("");
+  }, [reply]);
+
   return (
     <div className='mainWindow'>
-      <div className="title">
-        <h1>Back at it,Dipen</h1>
-      </div>
-
-
       <Chat></Chat>
       <ScaleLoader color="#fff" loading={loading}></ScaleLoader>
 
