@@ -21,7 +21,7 @@ const Login = () => {
         const body = isRegister ? { username, email, password } : { email, password };
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/${endpoint}`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/${endpoint}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body),
