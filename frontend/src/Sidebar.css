@@ -1,14 +1,18 @@
 .sideBar{
     display: flex;
-    border-right:1px solid #e8e6dc;
-    height:100%;
-    width:260px;
-    flex-shrink:0;
-    padding:12px;
     flex-direction: column;
-    gap:2rem;
+    gap: 1rem;
+    width: 260px;
+    height: 100%;
+    flex-shrink: 0;
+    padding: 12px 8px;
     box-sizing: border-box;
+    border-right: 1px solid #2B2A27;   /* subtle divider instead of a bright line */
 }
+.sideBar *{
+    background-color: transparent;     /* undo the global * background from App.css */
+}
+
 @media (max-width: 768px) {
     .sideBar {
         position: fixed;
@@ -24,81 +28,118 @@
 }
 
 
+/* ---------- top: logo + switch icons ---------- */
 .sideBar .topPart{
     display: flex;
-    gap:0.5rem;
     align-items: center;
     justify-content: space-between;
+    padding: 4px 8px;
 }
-.switchClaude a {
+.topPart h3{
+    font-size: 18px;
+    font-weight: 600;
+    color: #FAF9F5;
+}
+.switchClaude{
+    display: flex;
+    gap: 2px;
+}
+.switchClaude a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
     text-decoration: none;
     color: #B0AEA5;
-    margin:5px;
-
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+.switchClaude a:hover{
+    background-color: #2B2A27;
+    color: #FAF9F5;
 }
 
 
-.newChat a{
+/* ---------- new chat + nav links share one look ---------- */
+.newChat a,
+.nav li a{
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 8px 12px;
+    padding: 7px 10px;
     border-radius: 8px;
     font-size: 14px;
     text-decoration: none;
     color: #E8E6DC;
-    transition: background 0.15s ease;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
-.newChat a i{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-   
+.newChat a:hover,
+.nav li a:hover{
+    background-color: #2B2A27;
     color: #FAF9F5;
-    font-size: 12px;
-}
-.newChat a:hover{
-    background: #2B2A27;
 }
 
+.newChat a i{
+    width: 22px;
+    text-align: center;
+    color: #B0AEA5;
+    font-size: 14px;
+}
 
 .nav ul{
-   list-style: none;
-   display: flex;
-   flex-direction: column;
-   gap:1rem;
-}
-.nav a {
-  text-decoration: none;
-    color: #E8E6DC;  
-}
-.nav i {
-  font-style: normal;
-  color: #B0AEA5;
-  width: 18px;
-  text-align: center;
-}
-.nav li a{
+    list-style: none;
     display: flex;
-    align-items: center;
-    gap:12px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-  transition: background 0.15s ease, color 0.15s ease;
+    flex-direction: column;
+    gap: 2px;
+}
+.nav li a i{
+    font-style: normal;
+    width: 22px;
+    text-align: center;
+    font-size: 15px;
+    color: #B0AEA5;
 }
 
-.nav li a i {
-  font-style: normal;
-  width: 18px;           
-  text-align: center;
-  font-size: 15px;
-  color: #B0AEA5;               
+
+/* ---------- chat history ---------- */
+.chatHistory{
+    flex: 1;
+    min-height: 0;          /* lets the list scroll inside the sidebar */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
-.nav li a:hover {
-  background: #2B2A27;          
-  color: #FAF9F5;
+.sectionLabel{
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #8A8880;
+}
+.chatHistory ul{
+    list-style: none;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.chatHistory li{
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #CFCDC4;
+    cursor: pointer;
+    white-space: nowrap;      /* long titles get cut with "..." */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.15s ease;
+}
+.chatHistory li:hover{
+    background-color: #2B2A27;
+    color: #FAF9F5;
+}
+
+.chatHistory ul::-webkit-scrollbar{ width: 6px; }
+.chatHistory ul::-webkit-scrollbar-thumb{
+    background-color: #3A3936;
+    border-radius: 3px;
 }
