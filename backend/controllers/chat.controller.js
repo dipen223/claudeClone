@@ -10,7 +10,7 @@ const chatHandler = async(req,res) =>{
     try{
        let thread =  await Thread.findOne({ threadId, userId: req.userId });
        if(!thread){
-        //create a new thread
+       
         thread  = new Thread({
             threadId,
             userId: req.userId,
@@ -20,11 +20,8 @@ const chatHandler = async(req,res) =>{
        }else{
         thread.messages.push({role:"user",content:message});
        }
-
-       // send the conversation so far (incl. the new message) so it remembers context.
-       // only role + content: Mongo adds _id etc. that OpenAI rejects.
        const history = thread.messages
-           .slice(-20)                     // last 20 messages keeps long chats fast and cheap
+           .slice(-20)                
            .map(({ role, content }) => ({ role, content }));
 
        const assistantReply = await getOpenAIApiResponse(history);
